@@ -1,0 +1,98 @@
+\newlength{\alphabet}
+\settowidth{\alphabet}{\normalfont abcdefghijklmnopqrstuvwxyz}
+\usepackage[textwidth=2.4\alphabet]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsxtra}
+\usepackage[table,xcdraw,dvipsnames]{xcolor}
+\usepackage[english]{babel}
+\usepackage[
+    backend=biber,
+    style=numeric]{biblatex}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage[outputdir=out]{minted}
+\usepackage{svg}
+\usepackage{csquotes}
+\usepackage{mathtools}
+\usepackage[inline]{enumitem}
+\setlist{noitemsep}
+% \setlist{nosep}
+\setlist[1]{labelindent=\parindent}
+\setlist[description]{font=\normalfont, labelindent=0pt}
+\usepackage{multirow}
+\usepackage{tabularx}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage[noabbrev]{cleveref}
+\usepackage{caption}
+\DeclareCaptionLabelFormat{lc}{{#1}~{#2}}
+\captionsetup{font=small, format=plain, labelformat=lc}
+\captionsetup[subfigure]{labelsep=colon, labelfont=sc, labelformat=simple}
+
+\usepackage{subcaption}
+\usepackage{xargs}
+
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont[
+    SmallCapsFeatures = {LetterSpace=3, Renderer=Basic},
+    Ligatures=TeX,
+    Numbers={Proportional},
+]{Linux Libertine O}
+\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono for Powerline}
+\setmathfont[Scale=MatchUppercase]{Libertinus Math}
+\usepackage[protrusion=true, expansion=true]{microtype}
+
+\usepackage{etoolbox}
+%% Use lining fonts
+\newcommand\lining{\addfontfeatures{Numbers={Monospaced, Lining}}}
+\AtBeginEnvironment{tabular}{\lining} % In tables
+\renewcommand{\theequation}{ {\lining\arabic{equation}}} % For equation numbers
+
+\renewcommand*{\citesetup}{
+  \lining
+  \biburlsetup
+  \frenchspacing}
+
+\frenchspacing
+
+%% 'compact' reduces the space above and below headings to a single blank line
+\usepackage[compact]{titlesec}  
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+%% Upright (normal) numbers here
+\titleformat{\subsection}{\large}{\thesubsection}{.6em}{}
+%% Below, both heading should form sentences
+\titleformat{\subsubsection}{}{\thesubsubsection}{.6em}{}{\itshape}
+\titleformat{\paragraph}[runin]{}{\theparagraph}{0pt}{\itshape}
+\titlespacing*{\section}{0pt}{2\baselineskip}{1\baselineskip}
+\titlespacing*{\subsection}{0pt}{1\baselineskip}{1\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{8pt}{5pt}
+
+\newenvironment{abstract}{}{}
+\usepackage[runin]{abstract}
+\renewcommand{\abstractnamefont}{\large\bfseries}
+\abslabeldelim{\newline}
+\setlength{\abstitleskip}{-\parindent}
+
+
+\crefname{table}{table}{tables}
+\captionsetup[subfigure]{subrefformat=simple,labelformat=simple}
+    \renewcommand\thesubfigure{(\alph{subfigure})}
+
+\PassOptionsToPackage{norule, ragged, hang}{footmisc}
+\RequirePackage{fnpct}
+\RequirePackage{footmisc}
+%% Footnote text aligned with text margin
+\renewcommand\footnotemargin{\parindent}
+%% Footnote text with a normal mark
+\makeatletter
+\renewcommand\@makefntext[1]{
+    \@thefnmark.~#1}
+\makeatother
+
+

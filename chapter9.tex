@@ -1,0 +1,46 @@
+\chapter{Conclusions} \label{chapter9}
+In this section we restate the objectives we set in \Cref{chapter1} and evaluate its fulfillment. We also introduce the conclusions we have reached after carrying out this work and point what we believe are interesting lines for future work.
+
+\section{Analysis of objectives}
+At this point, we consider the objectives we presented in the introduction achieved. In order to analyze them properly, we briefly restate them:
+
+\begin{enumerate}[label=(O\arabic*)]
+    \item \textit{Identify the state-of-the-art options for computer vision problem and understand their strengths and weaknesses}. We offered an introduction in \Cref{chapter2} to the topic of computer vision and the strengths and weaknesses of the dominant tools in the field: convolutional neural networks and vision transformers.
+    \item \textit{Further our understanding of the disease, its detection and the associated difficulties. Review the field of computer-aided diagnosis, paying special attention to deep learning based approaches.} Our conclusions can be found in \Cref{chapter3}. We found that the diagnosis of diabetic retinopathy is a significant challenge even for specialized clinician, although relevant progress has been made in the field of computer aided detection.
+    \item \textit{Find a suitable dataset of retinographies for diabetic retinopathy grading. Ideally, it should be a widely used dataset, so our results are easily comparable to those of previous works. Explore the dataset and preprocess the images if necessary.} As we explain in \Cref{chapter4}, we decided to use the EyePACS dataset.
+    \item \textit{Create a computationally efficient model (both for inference and learning) based in computational neural networks able to accurately grade the severity levels of DR on fundus images}. In \Cref{chapter5}, we developed a medium-sized CNN that we trained on consumer-grade hardware (a single Nvidia GTX 1070 GPU) for a total of 9 hours. The network has excellent performance at DR grading, comparing favorably to much larger models, like the ones presented in the Diabetic Retinopathy Detection Kaggle competition \cite{diabeticretinopathydetection, secondTeam, thirdTeam}.
+
+    The main metric used to evaluate the model has been the Cohen's Kappa coefficient, a standard metric in the field. Our model obtains a score of \( \kappa = 0.8491\), which would set us second in the aforementioned Kaggle competition. In addition, we have also used standard metrics like accuracy and (macro) F1 score and calculated the confusion matrix and the ROC curve. These metrics confirm the hypothesis that the model has solid behavior over all classes, although it has problems classifying intermediate classes.
+    \item \textit{Study the necessary extensions of the model to address some lateral tasks: semantic search of retinal images and blood vessel or lesion segmentation}: \Cref{chapter6} presents an in-depth study of the use of embeddings to approach the problem of semantic search. We tested our results with the assistance of a professional clinician, who evaluated favorably the tool.
+    \item \textit{Develop interpretability tools to understand the way the model creates predictions}. In \Cref{chapter6} we applied several techniques to interpret the performance of the model, including:
+    \begin{enumerate}
+        \item Class activation maps and Grad-CAM to visualize which parts of the image are responsible for the output.
+        \item Visualization of the embeddings to explore the representation created by the model
+        \item Feature extraction: extracting the hidden representation of the model and performing weight visualization is useful to visualize how the convolutional layers work. 
+    \end{enumerate}
+    Visualization techniques have provided significant insight in the way the model works: in particular, it has become excellent at segmentation of blood vessels and has recognized the diagnostic significance of lesions. 
+    \item \textit{Compare the implemented model with a solution based on \textit{vision transformers}, both in terms of accuracy and interpretability.} In \Cref{chapter7} we implemented a vision transformer based approach, using a modified version of the ViT model pretrained over a big corpus of retina images. We have found that the transformer-based model was harder to train and its performance was disappointing and most techniques to accelerate training hinder performance severely.
+    
+    While vision transformers may still be the preferred choice when computational resources do not impose a hard limit, and they certainly offer unparalleled visualization possibilities, CNNs offer a solid balance between efficiency, interpretability, and performance.
+\end{enumerate}
+
+\section{Conclusions}
+Given our experience, the dominance of \textit{deep learning} based approaches in the field of computer-aided diabetic retinopathy diagnosis is not casual. Deep learning techniques are powerful, generalizable and do not require domain knowledge.
+
+Our revision of the state of the art has found many ingenious uses of deep learning mechanisms leading to excellent results, as \textit{zoom-in} or binocular methods. We have found, however, some shortages in the literature: there is no discussion of the computational requirements of the models and no discussion on how they could be integrated into clinical practice. These considerations are key for the practical usage of these tools. In this work, we have attempted to pay attention to these requirements: we have worked with tight computational requirements and paid attention to usually disregarded topics like calibration or interpretation.
+
+We have found that pretrained medium-sized CNN adapted to the problem can obtain excellent resources using very limited computational resources. Once the network has been trained it can be repurposed for different tasks with almost no computational overhead by adding specialized heads trained independently.
+
+We have also explored one clinical application for our model: using the embeddings extracted by the network to find similar images to a given one. This experience led us to believe that there is significant work to be made before these models can be used in practice. 
+
+Overall, we are optimistic about the future of deep learning for computer aided diagnosis. Vision transformers, offering an excellent balance between performance and interpretability, are a promising tool, although our experience leads us to believe they are currently not the best tool to use under tight computational requirements.
+
+\section{Future work}
+Our previous paragraphs depict some clear pathways for future work. First, larger scale tests exploring the utility of these models in a clinical setting are a long due necessity. We believe the most promising line of work is getting these models to interact and assist the clinician: for example, identifying similar images or areas of diagnostic relevance. 
+
+Using this model in clinical practice includes significant challenges: for example, the model must be able to recognize images of insufficient quality, must be well calibrated (so the reported confidence reflects the true probability of correct grading) and should be resilient against adversarial examples. 
+
+Of course, to use this models in practice, it would be interesting to provide them with a web interface or even porting them to mobile devices. The former can be useful to expose the model to professional clinicians, who may offer invaluable feedback, and the latter can greatly reduce the computational infrastructure to carry DR grading. The areas which lack the clinical infrastructure for DR detection and treatment are also likely to lack stable network connections, which makes a centralized structure inconvenient. 
+
+The importance of these tasks underestimated: an intuitive user experience and a fluent system of interaction can make more for the  adoption of DR grading in clinical practice than the small improvements in performance that dominate the literature.
+

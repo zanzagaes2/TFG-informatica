@@ -1,0 +1,53 @@
+\documentclass[12pt, a4paper, oneside]{book}
+\usepackage{tfg}
+
+
+\newtheorem{theorem}{Theorem}
+
+\DeclareMathOperator{\normal}{Normal}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\attentionop}{Attention}
+\DeclareMathOperator{\softmax}{softmax}
+\DeclareMathOperator{\argmax}{arg max}
+\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
+
+\newcommand{\real}[1]{\mathbb{R}^{#1}}
+\newcommand{\kaggle}{https://www.kaggle.com/competitions/diabetic-retinopathy-detection/overview}
+
+\addbibresource{references.bib}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do—}
+
+\begin{document}
+    \input{cover.tex}
+    \newpage
+    \input{abstract.tex}
+    \newpage
+    \input{abstract_sp}
+    \newpage
+    \input{acknowledgment.tex}
+    \tableofcontents
+
+    \newpage
+
+    \pagenumbering{arabic}
+    \setcounter{page}{1}
+
+    \input{chapter1.tex}
+    \input{chapter2.tex}
+    \input{chapter3.tex}
+    \input{chapter4.tex}
+    \input{chapter5.tex}
+    \input{chapter6.tex}
+    \input{chapter7.tex}
+    \input{chapter8.tex}
+    \input{chapter9.tex}
+    \input{contribution.tex}
+
+    \printbibliography[
+        heading=bibintoc,
+        title={References}
+    ]
+    \appendix
+
+\end{document}
